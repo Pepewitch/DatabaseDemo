@@ -1,2 +1,6 @@
 import app from './app';
-app.listen(process.env.PORT);
+import UserController from './controllers/User/UserController';
+
+UserController.getUsers();
+
+app.listen(process.env.PORT || 3000);

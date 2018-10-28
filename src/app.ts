@@ -7,8 +7,14 @@ import helmet from 'helmet';
 import router from './router';
 import { join } from 'path';
 import 'reflect-metadata';
+import fs from 'fs';
 
-dotenv.config({ path: '.env' });
+/**
+ * read local environment from .env file
+ */
+if (fs.existsSync(join(__dirname, '../.env'))) {
+  dotenv.config();
+}
 
 const app = express();
 

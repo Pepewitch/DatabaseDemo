@@ -1,4 +1,10 @@
-node_modules
-dist
-package-lock.json
+.idea/
+.vscode/
+node_modules/
+dist/
+tmp/
+temp/
+ormconfig.json
 .env
+package-lock.json
+coverage
