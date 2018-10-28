@@ -18,7 +18,7 @@ Either npm or yarn is okay. Choose one.
 #### 4. Setup database
 - Copy any files with `.example` namespace
 - Edit those files with your own data
-```json
+```
 // ormconfig.example.json
 {
   "type": "mysql",
@@ -40,7 +40,7 @@ Either npm or yarn is okay. Choose one.
 }
 
 ```
-```.env
+```
 // example.env
 PORT=80                    <---- Put your application listen port
 ```
