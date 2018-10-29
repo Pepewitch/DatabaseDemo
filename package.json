@@ -2,6 +2,10 @@
   "name": "express-mysql-boilerplate",
   "version": "1.0.0",
   "description": "boilerplate for express app with mysql database",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Pepewitch/express-mysql-boilerplate.git"
+  },
   "scripts": {
     "start": "ts-node src/server.ts",
     "build": "npm run build-ts && npm run tslint",
@@ -28,9 +32,12 @@
     "cors": "^2.8.4",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
+    "express-session": "^1.15.6",
     "helmet": "^3.14.0",
     "morgan": "^1.9.1",
     "mysql": "^2.14.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.10",
     "request": "^2.88.0",
     "typeorm": "^0.2.8"
@@ -39,11 +46,14 @@
     "@types/cors": "^2.8.4",
     "@types/dotenv": "^4.0.3",
     "@types/express": "^4.16.0",
+    "@types/express-session": "^1.15.11",
     "@types/helmet": "0.0.42",
     "@types/jest": "^23.3.8",
     "@types/morgan": "^1.7.35",
     "@types/mysql": "^2.15.5",
     "@types/node": "^8.10.36",
+    "@types/passport": "^0.4.6",
+    "@types/passport-local": "^1.0.33",
     "@types/supertest": "^2.0.6",
     "concurrently": "^4.0.1",
     "http-server": "^0.11.1",
