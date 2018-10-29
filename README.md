@@ -44,6 +44,7 @@ Either npm or yarn is okay. Choose one.
 ```
 // .env
 PORT=80                    <---- Put your application listen port
+SESSION_SECRET=SECRET      <---- Put your express-session secret
 ```
 #### 5. Create your Entity model
 Create them for yourself in `src/entity` directory using [typeorm](https://github.com/typeorm/typeorm)
