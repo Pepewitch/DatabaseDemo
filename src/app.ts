@@ -3,6 +3,7 @@ import express from 'express';
 import morgan from 'morgan';
 import { json, urlencoded } from 'body-parser';
 import cors from 'cors';
+import session from 'express-session';
 import helmet from 'helmet';
 import router from './router';
 import { join } from 'path';
@@ -40,6 +41,17 @@ app.use(urlencoded({ extended: true }));
  * allow cross origin
  */
 app.use(cors());
+
+/**
+ * add req.session
+ */
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || 'secret',
+    resave: true,
+    saveUninitialized: false,
+  }),
+);
 
 /**
  * secure application with many solutions
