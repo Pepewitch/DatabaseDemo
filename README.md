@@ -18,8 +18,9 @@ Either npm or yarn is okay. Choose one.
 #### 4. Setup database
 - Copy any files with `.example` namespace
 - Edit those files with your own data
+- Remove `.example` in their names.
 ```
-// ormconfig.example.json
+// ormconfig.json
 {
   "type": "mysql",
   "host": "localhost",      <---- Put your own database information here
@@ -41,7 +42,7 @@ Either npm or yarn is okay. Choose one.
 
 ```
 ```
-// example.env
+// .env
 PORT=80                    <---- Put your application listen port
 ```
 #### 5. Create your Entity model
