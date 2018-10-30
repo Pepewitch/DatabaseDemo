@@ -9,6 +9,7 @@ import router from './router';
 import { join } from 'path';
 import 'reflect-metadata';
 import fs from 'fs';
+import passport from './passport';
 
 /**
  * read local environment from .env file
@@ -52,6 +53,12 @@ app.use(
     saveUninitialized: false,
   }),
 );
+
+/**
+ *  use passportjs to authenticate user
+ */
+app.use(passport.initialize());
+app.use(passport.session());
 
 /**
  * secure application with many solutions
