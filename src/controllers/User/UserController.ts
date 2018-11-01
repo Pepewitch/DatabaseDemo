@@ -6,7 +6,7 @@ export default class UserController {
   @AsyncErrorHandler()
   public static async getUser(username: string) {
     const connection = await Controller.getConnection();
-    const user = await connection.manager.findOne(User, username);
+    const user = await connection.manager.findOne(User, { username });
     return user;
   }
 
