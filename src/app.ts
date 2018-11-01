@@ -1,4 +1,5 @@
-import dotenv from 'dotenv';
+import './config';
+import { join } from 'path';
 import express from 'express';
 import morgan from 'morgan';
 import { json, urlencoded } from 'body-parser';
@@ -6,17 +7,8 @@ import cors from 'cors';
 import session from 'express-session';
 import helmet from 'helmet';
 import router from './router';
-import { join } from 'path';
 import 'reflect-metadata';
-import fs from 'fs';
 import passport from './passport';
-
-/**
- * read local environment from .env file
- */
-if (fs.existsSync(join(__dirname, '../.env'))) {
-  dotenv.config();
-}
 
 const app = express();
 
@@ -51,7 +43,7 @@ app.use(
     secret: process.env.SESSION_SECRET || 'secret',
     resave: true,
     saveUninitialized: false,
-    cookie: { maxAge: 10000 },
+    cookie: { maxAge: 1000000000 },
   }),
 );
 
