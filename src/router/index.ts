@@ -5,6 +5,10 @@ const router = Router();
 
 router.use('/login', login);
 
+router.get('/ping', (req, res) => {
+  return res.status(200).send({ message: 'pong' });
+});
+
 router.get('/', (req, res) => {
   if (req.session.views) {
     req.session.views++;
