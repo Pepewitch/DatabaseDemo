@@ -1,10 +1,10 @@
 {
-  "name": "express-mysql-boilerplate",
+  "name": "DatabaseDemo",
   "version": "1.0.0",
   "description": "boilerplate for express app with mysql database",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Pepewitch/express-mysql-boilerplate.git"
+    "url": "git://github.com/Pepewitch/DatabaseDemo.git"
   },
   "scripts": {
     "start": "ts-node src/server.ts",
@@ -35,7 +35,7 @@
     "express-session": "^1.15.6",
     "helmet": "^3.14.0",
     "morgan": "^1.9.1",
-    "mysql": "^2.14.1",
+    "mysql": "^2.16.0",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth2": "^0.1.6",
