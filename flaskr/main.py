@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
 from cheroot.wsgi import Server, PathInfoDispatcher
-from flask import Flask , send_file
+from flask import Flask , send_file , Blueprint
 from model import staff
 from os.path import join
+from route.api import api
 
 app = Flask(__name__)
-
+app.register_blueprint(api)
 @app.route("/")
 def index():
     return send_file(join('..','view','index.html'))
