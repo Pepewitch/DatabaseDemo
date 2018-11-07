@@ -4,11 +4,9 @@ import express from 'express';
 import morgan from 'morgan';
 import { json, urlencoded } from 'body-parser';
 import cors from 'cors';
-import session from 'express-session';
 import helmet from 'helmet';
 import router from './router';
 import 'reflect-metadata';
-import passport from './passport';
 
 const app = express();
 
@@ -34,24 +32,6 @@ app.use(urlencoded({ extended: true }));
  * allow cross origin
  */
 app.use(cors());
-
-/**
- * add req.session
- */
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET || 'secret',
-    resave: true,
-    saveUninitialized: false,
-    cookie: { maxAge: 1000000000 },
-  }),
-);
-
-/**
- *  use passportjs to authenticate user
- */
-app.use(passport.initialize());
-app.use(passport.session());
 
 /**
  * secure application with many solutions
