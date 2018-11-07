@@ -1,7 +1,26 @@
 import pymysql
+from . import getConnection
+
+
+def getMedicalStaff():
+    mysql = getConnection()
+    result = None
+    try:
+        with mysql.cursor() as cursor:
+            # Read a single record
+            query = "SELECT * FROM Medical_staff"
+            cursor.execute(query)
+            result = cursor.fetchone()
+            print(result)
+    except Exception as e:
+        print (e)
+    finally:
+        mysql.close()
+    return result
+
 
 def test():
-    mysql = pymysql.connect(host='dgo.ojudge.in.th', user='dbsec33', password='123456', db='Hospital', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+    mysql = getConnection()
     result = None
     try:
         with mysql.cursor() as cursor:
