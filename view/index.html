@@ -6,5 +6,30 @@
         <div style="padding:24px">
             <h1>Welcome to Database Demo</h1>
         </div>
+        <div align="center">
+        <form action="/api/medical_staff" method="POST">
+            <p>POST Doctor</p>
+            <input name="First_name" placeholder="First_name"><br>
+            <input name="Last_name" placeholder="Last_name"><br>
+            <input name="Birthdate" placeholder="Birthdate" type="date"><br>
+            <select name="Sex">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select><br>
+            <input name="Salary" placeholder="Salary"><br>
+            <input name="Address" placeholder="Address"><br>
+            <select name="Medical_type">
+                <option value="Doctor">Doctor</option>
+                <option value="Pharmacist">Pharmacist</option>
+                <option value="Nurse">Nurse</option>
+            </select><br>
+            <input name="Email" placeholder="Email" type="email"><br>
+            <input name="Home_tel" placeholder="Home_tel"><br>
+            <input name="Mobile_tel" placeholder="Mobile_tel"><br>
+            <input name="Start_hiring_date" placeholder="Start_hiring_date" type="date"><br>
+            <input name="Stop_hiring_date" placeholder="Stop_hiring_date" type="date"><br>
+            <button type="submit">Submit</button>
+        </form>
+        </div>
     </body>
 </html>
