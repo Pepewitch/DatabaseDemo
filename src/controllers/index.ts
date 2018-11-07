@@ -1,16 +1,28 @@
-import { createConnection, Connection } from 'typeorm';
-import { AsyncErrorHandler } from '../decorators/error-handler';
+import mysql, { Connection, Pool } from 'mysql';
+import { Doctor } from 'Doctor';
 
-/**
- * Controller create a connection to the database which is defined in ormconfig.json
- */
 export default class Controller {
-  @AsyncErrorHandler()
-  public static async getConnection() {
-    if (!this.connection) {
-      this.connection = await createConnection();
+  public static getConnection() {
+    if (!this.pool) {
+      this.pool = mysql.createPool({
+        host: process.env.DB_HOST,
+        port: Number(process.env.DB_PORT),
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+        connectionLimit: 20,
+      });
     }
-    return this.connection;
+    return this.pool;
   }
-  private static connection: Connection;
+  public static testConnection() {
+    const connection = this.getConnection();
+    connection.query('SELECT 1+1 AS solution', (error, results, fields) => {
+      if (error) {
+        throw error;
+      }
+      console.log('The solution is: ', results[0].solution);
+    });
+  }
+  private static pool: Pool;
 }
