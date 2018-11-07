@@ -2,8 +2,6 @@
 
 from cheroot.wsgi import Server, PathInfoDispatcher
 from flask import Flask
-import pymysql
-
 from model import staff
 
 app = Flask(__name__)
