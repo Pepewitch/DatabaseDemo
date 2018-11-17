@@ -9,9 +9,23 @@ def insertDepartment(name , location , manager=None):
             # Read a single record
             query = ''
             if manager:
-                query = f'insert into Department (Department.DepartmentName , Department.Location , Department.Manager) values ({name} , {location} , {manager});'
+                query = f'insert into Department (\
+                Department.DepartmentName , \
+                Department.Location , \
+                Department.Manager\
+                ) values (\
+                {name} , \
+                {location} , \
+                {manager}\
+                );'
             else:
-                query = f'insert into Department (Department.DepartmentName , Department.Location) values ("{name}" , "{location}");'
+                query = f'insert into Department (\
+                Department.DepartmentName , \
+                Department.Location\
+                ) values (\
+                "{name}" , \
+                "{location}"\
+                );'
             cursor.execute(query)
             mysql.commit()
     except Exception as e:

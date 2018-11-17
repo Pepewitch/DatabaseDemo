@@ -7,25 +7,25 @@ def insertPatient(firstname , lastname , sex , birthdate , address , phone , par
     try:
         with mysql.cursor() as cursor:
             query = f'insert into Patient (\
-                Patient_first_name,\
-                Patient_last_name, \
-                Sex, \
-                Birthdate, \
-                Address, \
-                Phone_number, \
-                Parent_phone_number, \
-                Parent_first_name, \
-                Parent_last_name\
+            Patient_first_name,\
+            Patient_last_name, \
+            Sex, \
+            Birthdate, \
+            Address, \
+            Phone_number, \
+            Parent_phone_number, \
+            Parent_first_name, \
+            Parent_last_name\
             ) values (\
-                "{firstname}" ,\
-                "{lastname}" ,\
-                "{sex}" ,\
-                "{birthdate}" ,\
-                "{address}" ,\
-                "{phone}" ,\
-                "{parent_phone}" ,\
-                "{parent_firstname}" ,\
-                "{parent_lastname}"\
+            "{firstname}" ,\
+            "{lastname}" ,\
+            "{sex}" ,\
+            "{birthdate}" ,\
+            "{address}" ,\
+            "{phone}" ,\
+            "{parent_phone}" ,\
+            "{parent_firstname}" ,\
+            "{parent_lastname}"\
             )'
             cursor.execute(query)
             mysql.commit()
