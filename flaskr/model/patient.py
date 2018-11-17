@@ -45,14 +45,14 @@ def insertPatient(
         mysql.close()
     return result
 
-def getPatient(id=None):
+def getPatient(patient_id=None):
     mysql = getConnection()
     result = None
     try:
         with mysql.cursor() as cursor:
             query = 'select * from Patient'
             if id:
-                query += f' where Patient_ID = {id}'
+                query += f' where Patient_ID = {patient_id}'
                 cursor.execute(query)
                 result = cursor.fetchone()
             else:

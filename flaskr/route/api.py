@@ -63,13 +63,14 @@ def department_route():
 @api.route('/patient', methods=('GET', 'POST'))
 def patient_route():
     if request.method == 'GET':
-        return jsonify(patient.getPatient())
+        patient_id = request.args.get('id')
+        return jsonify(patient.getPatient(patient_id=patient_id))
     elif request.method == 'POST':
         patient.insertPatient(
             firstname=request.form['firstname'] , 
             lastname=request.form['lastname'] ,
             sex=request.form['sex'] ,
-            birthdate=parser.parse(request.form['birthdate']),
+            birthdate=parser.parse(request.form['birthdate']).strftime('%Y-%m-%d') ,
             address=request.form['address'],
             phone=request.form['phone'],
             parent_firstname=request.form['parent_firstname'],
