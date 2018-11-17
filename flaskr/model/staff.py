@@ -2,16 +2,24 @@ import pymysql
 from . import getConnection
 
 
-def getMedicalStaff(medical_type=None):
+def getMedicalStaff(staff_id=None , medical_type=None):
     mysql = getConnection()
     result = None
     try:
         with mysql.cursor() as cursor:
             query = "SELECT * FROM Medical_staff"
-            if medical_type != None:
-                query += f' WHERE Medical_type = "{medical_type}"'
+            condition = []
+            if medical_type:
+                condition.append(f'Medical_type = "{medical_type}"')
+            if staff_id:
+                condition.append(f'Staff_ID = {staff_id}')
+            if len(condition) > 0:
+                query += ' WHERE ' + ' AND '.join(condition)
             cursor.execute(query)
-            result = cursor.fetchall()
+            if staff_id:
+                result = cursor.fetchone()
+            else:
+                result = cursor.fetchall()
     except Exception as e:
         print (e)
     finally:

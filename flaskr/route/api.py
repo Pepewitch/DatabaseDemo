@@ -8,7 +8,8 @@ api = Blueprint('api', __name__, url_prefix='/api')
 def medical_staff_route():
     if request.method == 'GET':
         medical_type = request.args.get('type')
-        return jsonify(staff.getMedicalStaff(medical_type=medical_type))
+        staff_id = request.args.get('id')
+        return jsonify(staff.getMedicalStaff(medical_type=medical_type , staff_id=staff_id))
     elif request.method == 'PATCH':
         staff_id = request.args.get('id')
         sex = request.args.get('sex')
