@@ -11,9 +11,24 @@ def medical_staff_route():
     if request.method == 'GET':
         medical_type = request.args.get('type')
         return jsonify(staff.getMedicalStaff(medical_type=medical_type))
-    # TODO: add function edit
-    # elif request.method == 'PATCH':
-    #     staff.edit()
+    elif request.method == 'PATCH':
+        staff_id = request.args.get('id')
+        sex = request.args.get('sex')
+        salary = request.args.get('salary')
+        mobile_tel = request.args.get('mobile_tel')
+        home_tel = request.args.get('home_tel')
+        email = request.args.get('email')
+        address = request.args.get('address')
+        staff.edit(
+            staff_id=staff_id , 
+            sex=sex , 
+            salary=salary , 
+            mobile_tel=mobile_tel , 
+            home_tel=home_tel , 
+            email=email , 
+            address=address
+        )
+        return jsonify({'message': f'UPDATE Staff_ID = {id}'})
     elif request.method == 'DELETE':
         staff.delete(request.args.get('id'))
         return jsonify({'message': f'DELETE Staff_ID = {id}'})

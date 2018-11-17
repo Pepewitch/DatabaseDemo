@@ -36,21 +36,21 @@ def edit(
             temp = 'UPDATE Medical_staff SET '
             query = temp
             if sex:
-                query += f'Sex = {sex} , '
+                query += f'Sex = "{sex}" , '
             if salary:
                 query += f'Salary = {salary} , '
             if mobile_tel:
-                query += f'Mobile_tel = {mobile_tel} , '
+                query += f'Mobile_tel = "{mobile_tel}" , '
             if home_tel:
-                query += f'Home_tel = {home_tel} , '
+                query += f'Home_tel = "{home_tel}" , '
             if firstname:
-                query += f'First_name = {firstname} , '
+                query += f'First_name = "{firstname}" , '
             if lastname:
-                query += f'Last_name = {lastname} , '
+                query += f'Last_name = "{lastname}" , '
             if address:
-                query += f'Address = {address} , '
+                query += f'Address = "{address}" , '
             if email:
-                query += f'Email = {email} , '
+                query += f'Email = "{email}" , '
             if query == temp:
                 raise ValueError('Args are invalid!')
             else:
