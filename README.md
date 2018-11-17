@@ -13,9 +13,9 @@ This repository is a demo for database subject , Chulalongkorn University
 
 ## API
 ### GET /api/medical_staff
-    Get medical staff from database with / without condition
+#### Get medical staff from database with / without condition
 | Query | Output |
-|: --- :|: --- :|
+|:---:|:---:|
 | None | get all staff , return array of object |
 | id | get staff which match `id` , return single object |
 | type | get staff which medical_type match `type` , return array of object |
