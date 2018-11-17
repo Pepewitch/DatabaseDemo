@@ -16,9 +16,9 @@ This repository is a demo for database subject , Chulalongkorn University
 #### Get medical staff from database with / without condition
 | Query | Output |
 |:---:|:---:|
-| None | Get all staff , return an array of object |
-| id | Get staff which match `id` , return a single object |
-| type | Get staff which medical_type match `type` , return an array of object |
+| None | Get all staffs , return an array of object |
+| id | Get a staff which match `id` , return a single object |
+| type | Get staffs which medical_type match `type` , return an array of object |
 #### Object description
 ```
 {
@@ -35,6 +35,55 @@ This repository is a demo for database subject , Chulalongkorn University
     "Staff_ID": number
 }
 ```
+
+### GET /api/department
+#### Get department from database
+| Query | Output |
+|:---:|:---:|
+| None | Get all departments , return an array of object |
+#### Object description
+```
+{
+    "DepartmentName": string,
+    "Location": string,
+    "Manager_ID": number,
+    "Manager_first_name": string,
+    "Manager_last_name": string,
+    "Manager_sex": 'Male' | 'Female',
+    "Manager_tel": string
+}
+```
+
+### POST /api/department
+#### Add department to database
+| Form | Value |
+|:---:|:---:|
+| name | Department name |
+| location | Department location |
+| manager | staff_id of the manager |
+
+### GET /api/patient
+#### Get patient from database with / without condition
+| Query | Output |
+|:---:|:---:|
+| None | Get all patients , return an array of object |
+| id | Get a patient which match `id` , return a single object |
+#### Object description
+```
+{
+    "Address": string,
+    "Birthdate": datetime string eg. "Sun, 19 May 1985 00:00:00 GMT",
+    "Parent_first_name": string,
+    "Parent_last_name": string,
+    "Parent_phone_number": string,
+    "Patient_ID": number,
+    "Patient_first_name": string,
+    "Patient_last_name": string,
+    "Phone_number": string,
+    "Sex": 'Male' | 'Female'
+}
+```
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
