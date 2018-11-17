@@ -16,14 +16,14 @@ This repository is a demo for database subject , Chulalongkorn University
 #### Get medical staff from database with / without condition
 | Query | Output |
 |:---:|:---:|
-| None | get all staff , return array of object |
-| id | get staff which match `id` , return single object |
-| type | get staff which medical_type match `type` , return array of object |
-##### Object description
+| None | Get all staff , return an array of object |
+| id | Get staff which match `id` , return a single object |
+| type | Get staff which medical_type match `type` , return an array of object |
+#### Object description
 ```
 {
     "Address": string,
-    "Birthdate": date format string eg. "Fri, 26 Apr 1991 00:00:00 GMT",
+    "Birthdate": datetime string eg. "Fri, 26 Apr 1991 00:00:00 GMT",
     "Email": string,
     "First_name": string,
     "Home_tel": string,
