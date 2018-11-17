@@ -1,7 +1,5 @@
 from flask import Blueprint, request, jsonify
-from model import staff
-from model import department
-from model import patient
+from model import staff, department, patient, appoint
 from dateutil import parser
 
 api = Blueprint('api', __name__, url_prefix='/api')
@@ -76,5 +74,17 @@ def patient_route():
             parent_firstname=request.form['parent_firstname'],
             parent_lastname=request.form['parent_lastname'],
             parent_phone=request.form['parent_phone']
+        )
+        return jsonify(request.form)
+
+@api.route('/appoint', methods=('GET', 'POST'))
+def appoint_route():
+    if request.method == 'GET':
+        return jsonify(appoint.getAppoint())
+    elif request.method == 'POST':
+        appoint.insertAppoint(
+            doctor_id=request.form['doctor_id'] , 
+            patient_id=request.form['patient_id'] , 
+            appoint_date=request.form['appoint_date']
         )
         return jsonify(request.form)
