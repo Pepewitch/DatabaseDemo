@@ -34,7 +34,7 @@ def getAppoint(start=None , stop=None , patient_id=None , doctor_id=None):
             Medical_staff.Email as Doctor_email ,\
             Patient_first_name,\
             Patient_last_name,\
-            Patient.Sex as Patient_sex,\
+            Patient.Sex as Patient_sex \
             from Appoint \
             join Medical_staff on Appoint.Doctor_ID = Medical_staff.Staff_ID \
             join Patient on Appoint.Patient_ID = Patient.Patient_ID'
