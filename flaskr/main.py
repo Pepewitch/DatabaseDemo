@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from cheroot.wsgi import Server, PathInfoDispatcher
-from flask import Flask , send_file , Blueprint
+from flask import Flask, send_file
 from model import staff
 from os.path import join
 from route.api import api

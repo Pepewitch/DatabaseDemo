@@ -2,22 +2,21 @@ import pymysql
 from . import getConnection
 
 
-def getMedicalStaff():
+def getMedicalStaff(medical_type=None):
     mysql = getConnection()
     result = None
     try:
         with mysql.cursor() as cursor:
-            # Read a single record
             query = "SELECT * FROM Medical_staff"
+            if medical_type != None:
+                query += f' WHERE Medical_type = "{medical_type}"'
             cursor.execute(query)
-            result = cursor.fetchone()
-            print(result)
+            result = cursor.fetchall()
     except Exception as e:
         print (e)
     finally:
         mysql.close()
     return result
-
 
 def test():
     mysql = getConnection()
@@ -33,5 +32,4 @@ def test():
         print (e)
     finally:
         mysql.close()
-
         return result
