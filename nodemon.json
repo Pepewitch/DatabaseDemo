@@ -1,0 +1,7 @@
+{
+  "verbose": true,
+  "ignore": ["**/*/*.pyc"],
+  "execMap": {
+    "py": "python3"
+  }
+}
