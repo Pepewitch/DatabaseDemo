@@ -53,6 +53,8 @@ def edit(
                 query += f'Email = {email} , '
             if query == temp:
                 raise ValueError('Args are invalid!')
+            else:
+                query += f' WHERE Staff_ID = {staff_id}'
             cursor.execute(query)
             mysql.commit()
     except ValueError as e:
