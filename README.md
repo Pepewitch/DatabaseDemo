@@ -14,26 +14,26 @@ This repository is a demo for database subject , Chulalongkorn University
 ## API
 ### GET /api/medical_staff
     Get medical staff from database with / without condition
-    | Query | Output |
-    |: --- :|: --- :|
-    | None | get all staff , return array of object |
-    | id | get staff which match `id` , return single object |
-    | type | get staff which medical_type match `type` , return array of object |
-    ```
-    {
-        "Address": string,
-        "Birthdate": date format string eg. "Fri, 26 Apr 1991 00:00:00 GMT",
-        "Email": string,
-        "First_name": string,
-        "Home_tel": string,
-        "Last_name": string,
-        "Medical_type": 'Doctor' | 'Pharmacist' | 'Nurse',
-        "Mobile_tel": string,
-        "Salary": number,
-        "Sex": 'Male' | 'Female',
-        "Staff_ID": number
-    }
-    ```
+| Query | Output |
+|: --- :|: --- :|
+| None | get all staff , return array of object |
+| id | get staff which match `id` , return single object |
+| type | get staff which medical_type match `type` , return array of object |
+```
+{
+    "Address": string,
+    "Birthdate": date format string eg. "Fri, 26 Apr 1991 00:00:00 GMT",
+    "Email": string,
+    "First_name": string,
+    "Home_tel": string,
+    "Last_name": string,
+    "Medical_type": 'Doctor' | 'Pharmacist' | 'Nurse',
+    "Mobile_tel": string,
+    "Salary": number,
+    "Sex": 'Male' | 'Female',
+    "Staff_ID": number
+}
+```
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
