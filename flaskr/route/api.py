@@ -2,9 +2,9 @@ from flask import Blueprint, request, jsonify
 from model import staff
 from model import department
 from model import patient
+from dateutil import parser
 
 api = Blueprint('api', __name__, url_prefix='/api')
-
 
 @api.route('/medical_staff')
 def medical_staff_route():
@@ -18,8 +18,6 @@ def department_route():
     elif request.method == 'POST':
         try:
             if 'name' in request.form:
-                print('name' , request.form['name'])
-                print('location' , request.form['location'])
                 if 'manager' in request.form:
                     department.insertDepartment(
                         name=request.form['name'],
@@ -43,6 +41,15 @@ def patient_route():
     if request.method == 'GET':
         return jsonify(patient.getPatient())
     elif request.method == 'POST':
-        # Will edit to add user in staff module
-        print(request.form)
+        patient.insertPatient(
+            firstname=request.form['firstname'] , 
+            lastname=request.form['lastname'] ,
+            sex=request.form['sex'] ,
+            birthdate=parser(request.form['birthdate']),
+            address=request.form['address'],
+            phone=request.form['phone'],
+            parent_firstname=request.form['parent_firstname'],
+            parent_lastname=request.form['parent_lastname'],
+            parent_phone=request.form['parent_phone']
+        )
         return jsonify(request.form)

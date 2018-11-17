@@ -6,7 +6,6 @@ def insertDepartment(name , location , manager=None):
     result = None
     try:
         with mysql.cursor() as cursor:
-            # Read a single record
             query = ''
             if manager:
                 query = f'insert into Department (\
