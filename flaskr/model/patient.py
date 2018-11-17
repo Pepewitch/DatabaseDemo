@@ -1,7 +1,17 @@
 import pymysql
 from . import getConnection
 
-def insertPatient(firstname , lastname , sex , birthdate , address , phone , parent_phone , parent_firstname , parent_lastname):
+def insertPatient(
+    firstname ,
+    lastname , 
+    sex , 
+    birthdate , 
+    address , 
+    phone , 
+    parent_phone , 
+    parent_firstname , 
+    parent_lastname
+):
     mysql = getConnection()
     result = None
     try:
@@ -35,15 +45,19 @@ def insertPatient(firstname , lastname , sex , birthdate , address , phone , par
         mysql.close()
     return result
 
-def getPatient():
+def getPatient(id=None):
     mysql = getConnection()
     result = None
     try:
         with mysql.cursor() as cursor:
             query = 'select * from Patient'
-            cursor.execute(query)
-            result = cursor.fetchall()
-            print(result)
+            if id:
+                query += f' where Patient_ID = {id}'
+                cursor.execute(query)
+                result = cursor.fetchone()
+            else:
+                cursor.execute(query)
+                result = cursor.fetchall()
     except Exception as e:
         print (e)
     finally:

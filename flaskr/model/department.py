@@ -47,3 +47,5 @@ def getDepartment():
     finally:
         mysql.close()
     return result
+
+# TODO: Add method to edit department

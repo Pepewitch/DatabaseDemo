@@ -19,12 +19,13 @@ def insertAppoint(doctor_id , patient_id , appoint_date):
         mysql.close()
     return result
 
-def getAppoint(start=None , stop=None):
+def getAppoint(start=None , stop=None , id=None):
     mysql = getConnection()
     result = None
     try:
         with mysql.cursor() as cursor:
             query = 'select * from Appoint'
+            # TODO: add query by id
             if start and stop:
                 query += f' where Appointment_date >= "{start}" and Appointment_date <= "{stop}"'
             cursor.execute(query)

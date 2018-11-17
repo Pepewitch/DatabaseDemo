@@ -6,10 +6,19 @@ from dateutil import parser
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
-@api.route('/medical_staff')
+@api.route('/medical_staff' , methods=('GET' , 'PATCH' , 'DELETE'))
 def medical_staff_route():
-    medical_type = request.args.get('type')
-    return jsonify(staff.getMedicalStaff(medical_type=medical_type))
+    if request.method == 'GET':
+        medical_type = request.args.get('type')
+        return jsonify(staff.getMedicalStaff(medical_type=medical_type))
+    # TODO: add function edit
+    # elif request.method == 'PATCH':
+    #     staff.edit()
+    elif request.method == 'DELETE':
+        staff.delete(request.args.get('id'))
+        return jsonify({'message': f'DELETE Staff_ID = {id}'})
+
+# TODO: Add route for add medical_staff with type doctor / pharmacist / nurse , also add in Doctor table 
 
 @api.route('/department', methods=('GET', 'POST', 'PATCH', 'DELETE'))
 def department_route():
@@ -32,7 +41,8 @@ def department_route():
         except Exception as e:
             print('Exception' , e)
         return jsonify(request.form)
-    else:
+    elif request.method == 'PATCH':
+        # TODO: edit department
         print(request.form)
         return jsonify(request.form)
 
@@ -45,7 +55,7 @@ def patient_route():
             firstname=request.form['firstname'] , 
             lastname=request.form['lastname'] ,
             sex=request.form['sex'] ,
-            birthdate=parser(request.form['birthdate']),
+            birthdate=parser.parse(request.form['birthdate']),
             address=request.form['address'],
             phone=request.form['phone'],
             parent_firstname=request.form['parent_firstname'],
