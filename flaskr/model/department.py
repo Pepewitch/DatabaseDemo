@@ -7,7 +7,7 @@ def insertDepartment(name , location , manager=None):
     try:
         with mysql.cursor() as cursor:
             query = ''
-            if manager:
+            if manager != None:
                 query = f'insert into Department (\
                 Department.DepartmentName , \
                 Department.Location , \
