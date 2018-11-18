@@ -59,9 +59,11 @@ def department_route():
                 'location' : request.form['location'],
             }
             department.insertDepartment(**params)
+            return '' , 200
         except HTTPException as e:
             return jsonify({'message' : 'Arguments are invalid'}) , 400
-        return jsonify(request.form)
+        except Exception:
+            return '' , 500
     elif request.method == 'PATCH':
         # TODO: edit department
         print(request.form)
@@ -85,29 +87,36 @@ def patient_route():
             params['parent_lastname']=request.form['parent_lastname']
             params['parent_phone']=request.form['parent_phone']
             patient.insertPatient(**params)
-        except HTTPException as e:
+            return '' , 200
+        except HTTPException:
             return jsonify({'message' : 'Arguments are invalid'}) , 400
-        return jsonify(request.form)
+        except Exception:
+            return '' , 500
 
 @api.route('/appoint', methods=('GET', 'POST'))
 def appoint_route():
     if request.method == 'GET':
         try:
-            return jsonify(appoint.getAppoint())
+            params = {
+                'patient_id' : request.args.get('patient_id'),
+                'doctor_id' : request.args.get('doctor_id')
+            }
+            return jsonify(appoint.getAppoint(**params))
         except Exception:
             return '' , 500
         
     elif request.method == 'POST':
         try:
             params = {
-                doctor_id:request.form['doctor_id'] , 
-                patient_id:request.form['patient_id'] , 
-                appoint_date:parser.parse(request.form['appoint_date']).strftime('%Y-%m-%d %H:%M:%S')
+                'doctor_id':request.form['doctor_id'] , 
+                'patient_id':request.form['patient_id'] , 
+                'appoint_date':parser.parse(request.form['appoint_date']).strftime('%Y-%m-%d %H:%M:%S')
             }
             appoint.insertAppoint(**params)
-            return jsonify(request.form)
+            return '' , 200
         except HTTPException:
             return jsonify({'message' : 'Arguments are invalid'}) , 400
-        except Exception:
+        except Exception as e:
+            print(e)
             return '' , 500
         
