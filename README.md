@@ -126,7 +126,7 @@ This repository is a demo for database subject , Chulalongkorn University
 #### Object description
 ```
 {
-    "Appointment_date":doctordoctor datetime string eg. "Mon, 23 Jul 2018 13:00:00 GMT",
+    "Appointment_date": datetime string eg. "Mon, 23 Jul 2018 13:00:00 GMT",
     "Doctor_ID": number,
     "Doctor_email": string,
     "Doctor_first_name": string,
