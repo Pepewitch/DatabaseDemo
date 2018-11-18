@@ -88,18 +88,110 @@ def delete(staff_id):
         mysql.close()
     return result
 
-def test():
+def insertNurse(sex,salary,mobile_tel,firstname,lastname,home_tel,email,address,birthdate,nurse_type):
     mysql = getConnection()
     result = None
     try:
         with mysql.cursor() as cursor:
-            # Read a single record
-            sql = "SELECT * FROM `Medical_staff` where `Email` = %s"
-            cursor.execute(sql, ('aqover@hotmail.com',))
-            result = cursor.fetchone()
-            print(result)
+            query1 = f"INSERT INTO Medical_staff (\
+	        First_name,Last_name,Birthdate,Sex,Salary,Address,Medical_type,Email,Home_tel,Mobile_tel\
+            ) VALUES (\
+	        '{firstname}',\
+            '{lastname}' , \
+            '{birthdate}' , \
+            '{sex}' , \
+            {salary} , \
+            '{address}' , \
+            'Nurse' , \
+            '{email}' , \
+            '{home_tel}' , \
+            '{mobile_tel}'\
+            );"
+            query2 = f" \
+            insert into Nurse (\
+            Nurse_ID , \
+            Nurse_type\
+            ) values ( \
+            last_insert_id() , \
+            '{nurse_type}' \
+            );"
+            cursor.execute(query1)
+            cursor.execute(query2)
+            mysql.commit()
     except Exception as e:
         print (e)
     finally:
         mysql.close()
-        return result
+    return result
+
+def insertDoctor(sex,salary,mobile_tel,firstname,lastname,home_tel,email,address,birthdate,doctor_type):
+    mysql = getConnection()
+    result = None
+    try:
+        with mysql.cursor() as cursor:
+            query1 = f"INSERT INTO Medical_staff (\
+	        First_name,Last_name,Birthdate,Sex,Salary,Address,Medical_type,Email,Home_tel,Mobile_tel\
+            ) VALUES (\
+	        '{firstname}',\
+            '{lastname}' , \
+            '{birthdate}' , \
+            '{sex}' , \
+            {salary} , \
+            '{address}' , \
+            'Doctor' , \
+            '{email}' , \
+            '{home_tel}' , \
+            '{mobile_tel}'\
+            );"
+            query2 = f" \
+            insert into Doctor (\
+            Doctor_ID , \
+            Doctor_type\
+            ) values ( \
+            last_insert_id() , \
+            '{doctor_type}' \
+            );"
+            cursor.execute(query1)
+            cursor.execute(query2)
+            mysql.commit()
+    except Exception as e:
+        print (e)
+    finally:
+        mysql.close()
+    return result
+
+def insertPharmacist(sex,salary,mobile_tel,firstname,lastname,home_tel,email,address,birthdate,pharmacist_type):
+    mysql = getConnection()
+    result = None
+    try:
+        with mysql.cursor() as cursor:
+            query1 = f"INSERT INTO Medical_staff (\
+	        First_name,Last_name,Birthdate,Sex,Salary,Address,Medical_type,Email,Home_tel,Mobile_tel\
+            ) VALUES (\
+	        '{firstname}',\
+            '{lastname}' , \
+            '{birthdate}' , \
+            '{sex}' , \
+            {salary} , \
+            '{address}' , \
+            'Pharmacist' , \
+            '{email}' , \
+            '{home_tel}' , \
+            '{mobile_tel}'\
+            );"
+            query2 = f" \
+            insert into Pharmacist (\
+            Pharmacist_ID , \
+            Pharmacist_type\
+            ) values ( \
+            last_insert_id() , \
+            '{pharmacist_type}' \
+            );"
+            cursor.execute(query1)
+            cursor.execute(query2)
+            mysql.commit()
+    except Exception as e:
+        print (e)
+    finally:
+        mysql.close()
+    return result

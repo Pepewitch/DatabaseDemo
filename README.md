@@ -38,15 +38,70 @@ This repository is a demo for database subject , Chulalongkorn University
 ### GET /api/medical_staff/<staff_id>
     Get a medical staff that match staff_id  
 
-### PATCH /api/medical_staff/<staff_id>
-    Edit a medical staff that match staff_id  
+### GET /api/medical_staff/doctor
+    Get all doctors
+
+### POST /api/medical_staff/doctor
+    Add a doctor
 | Body | Type | Value |
 |:---:|:---:|:---:|
-| sex | string | Staff sex |
-| salary | number | Staff salary |
-| mobile_tel | string | Staff mobile_tel |
-| home_tel | string | Staff home_tel |
-| address | string | Staff address |
+| firstname | string | Doctor firstname |
+| lastname | string | Doctor lastname |
+| sex | string | Doctor sex |
+| salary | number | Doctor salary |
+| mobile_tel | string | Doctor mobile_tel |
+| home_tel | string | Doctor home_tel |
+| address | string | Doctor address |
+| email | string | Doctor email |
+| doctor_type | string | Doctor type |
+| birthdate | string | datestring in ISO format from Date.toISOString() |
+
+### GET /api/medical_staff/nurse
+    Get all nurses
+
+### POST /api/medical_staff/nurse
+    Add a nurse
+| Body | Type | Value |
+|:---:|:---:|:---:|
+| firstname | string | Nurse firstname |
+| lastname | string | Nurse lastname |
+| sex | string | Nurse sex |
+| salary | number | Nurse salary |
+| mobile_tel | string | Nurse mobile_tel |
+| home_tel | string | Nurse home_tel |
+| address | string | Nurse address |
+| email | string | Nurse email |
+| nurse_type | string | Nurse type |
+| birthdate | string | datestring in ISO format from Date.toISOString() |
+
+### GET /api/medical_staff/pharmacist
+    Get all pharmacists
+
+### POST /api/medical_staff/pharmacist
+    Add a pharmacist
+| Body | Type | Value |
+|:---:|:---:|:---:|
+| firstname | string | Pharmacist firstname |
+| lastname | string | Pharmacist lastname |
+| sex | string | Pharmacist sex |
+| salary | number | Pharmacist salary |
+| mobile_tel | string | Pharmacist mobile_tel |
+| home_tel | string | Pharmacist home_tel |
+| address | string | Pharmacist address |
+| email | string | Pharmacist email |
+| pharmacist_type | string | Pharmacist type |
+| birthdate | string | datestring in ISO format from Date.toISOString() |
+
+### PATCH /api/medical_staff/<staff_id>
+    Edit a medical staff that match staff_id, optional key can be used together.
+| Body | Type | Value |
+|:---:|:---:|:---:|
+| sex | string (Optional) | Staff sex |
+| salary | number (Optional) | Staff salary |
+| mobile_tel | string (Optional) | Staff mobile_tel |
+| home_tel | string (Optional) | Staff home_tel |
+| address | string (Optional) | Staff address |
+| email | string (Optional) | Staff email |
 
 ### DELETE /api/medical_staff/<staff_id>
     Delete a medical staff that match staff_id
@@ -121,8 +176,8 @@ This repository is a demo for database subject , Chulalongkorn University
 | Query | Type |Output |
 |:---:|:---:|:---:|
 | None | None | Get all appointments , return an array of object |
-| patient_id | number(Optional) | Get appointments which match patient_id , return an array of object |
-| doctor_id | number(Optional) | Get appointments which match doctor_id , return an array of object |
+| patient_id | number (Optional) | Get appointments which match patient_id , return an array of object |
+| doctor_id | number (Optional) | Get appointments which match doctor_id , return an array of object |
 #### Object description
 ```
 {
