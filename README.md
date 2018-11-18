@@ -9,7 +9,7 @@ This repository is a demo for database subject , Chulalongkorn University
 ## Quick start
 * run `pip3 install -r requirements.txt` to install module
 * run `python3 flaskr/main.py` to run the application in PORT 8080
-* Optional run `nodemon flaskr/main.py` instread of python3 to watch files
+* **Optional** run `nodemon flaskr/main.py` instread of python3 to watch files
 
 ## API
 ### GET /api/medical_staff
@@ -117,14 +117,16 @@ This repository is a demo for database subject , Chulalongkorn University
 | parent_phone | string | Patient's parent phone |
 
 ### GET /api/appoint
-    Get appointments from database  
+    Get appointments from database, many optional queries can be used together.
 | Query | Type |Output |
 |:---:|:---:|:---:|
 | None | None | Get all appointments , return an array of object |
+| patient_id | number(Optional) | Get appointments which match patient_id , return an array of object |
+| doctor_id | number(Optional) | Get appointments which match doctor_id , return an array of object |
 #### Object description
 ```
 {
-    "Appointment_date": datetime string eg. "Mon, 23 Jul 2018 13:00:00 GMT",
+    "Appointment_date":doctordoctor datetime string eg. "Mon, 23 Jul 2018 13:00:00 GMT",
     "Doctor_ID": number,
     "Doctor_email": string,
     "Doctor_first_name": string,
