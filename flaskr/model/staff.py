@@ -62,6 +62,7 @@ def edit(
             if query == temp:
                 raise ValueError('Args are invalid!')
             else:
+                query = query[:-2]
                 query += f' WHERE Staff_ID = {staff_id}'
             cursor.execute(query)
             mysql.commit()
@@ -73,12 +74,12 @@ def edit(
         mysql.close()
     return result
 
-def delete(id):
+def delete(staff_id):
     mysql = getConnection()
     result = None
     try:
         with mysql.cursor() as cursor:
-            query = "DELETE FROM Medical_staff WHERE Staff_ID = {id}"
+            query = f"DELETE FROM Medical_staff WHERE Staff_ID = {staff_id}"
             cursor.execute(query)
             mysql.commit()
     except Exception as e:
