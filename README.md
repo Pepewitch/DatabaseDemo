@@ -49,7 +49,8 @@ This repository is a demo for database subject , Chulalongkorn University
 | address | string | Staff address |
 
 ### DELETE /api/medical_staff/<staff_id>
-    Delete a medical staff that match staff_id  
+    Delete a medical staff that match staff_id
+    **** Cannot delete because of reference from Doctor , Nurse and Pharmacist table , wait for fix **** 
 
 ### GET /api/department
     Get department from database  
@@ -108,7 +109,7 @@ This repository is a demo for database subject , Chulalongkorn University
 | firstname | string | Patient firstname |
 | lastname | string | Patient lastname |
 | sex | string | 'Male' or 'Female' |
-| birthdate | string | datestring in ISOString format, return value from method Date.toISOString() |
+| birthdate | string | datestring in ISO format from Date.toISOString() |
 | address | string | Patient address |
 | phone | string | Patient phone number |
 | parent_firstname | string | Patient's parent firstname |
@@ -135,6 +136,13 @@ This repository is a demo for database subject , Chulalongkorn University
     "Patient_sex": 'Male' | 'Female'
 }
 ```
+### POST /api/appoint
+    Add an appointment
+| Body | Type | Value |
+|:---:|:---:|:---:|
+| doctor_id | number | Staff_ID of the doctor |
+| patient_id | number | Patient_ID |
+| appoint_date | string | datetimestring in ISO format from Date.toISOString() |
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
