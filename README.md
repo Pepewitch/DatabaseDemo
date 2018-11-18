@@ -13,7 +13,7 @@ This repository is a demo for database subject , Chulalongkorn University
 
 ## API
 ### GET /api/medical_staff
-> Get medical staff from database with / without condition  
+    Get medical staff from database with / without condition  
 | Query | Type | Output |
 |:---:|:---:|:---:|
 | None | None |Get all staffs , return an array of object |
@@ -36,10 +36,10 @@ This repository is a demo for database subject , Chulalongkorn University
 }
 ```
 ### GET /api/medical_staff/<staff_id>
-> Get a medical staff that match staff_id  
+    Get a medical staff that match staff_id  
 
 ### PATCH /api/medical_staff/<staff_id>
-> Edit a medical staff that match staff_id  
+    Edit a medical staff that match staff_id  
 | Body | Type | Value |
 |:---:|:---:|:---:|
 | sex | string | Staff sex |
@@ -49,10 +49,10 @@ This repository is a demo for database subject , Chulalongkorn University
 | address | string | Staff address |
 
 ### DELETE /api/medical_staff/<staff_id>
-> Delete a medical staff that match staff_id  
+    Delete a medical staff that match staff_id  
 
 ### GET /api/department
-> Get department from database  
+    Get department from database  
 | Query | Type |Output |
 |:---:|:---:|:---:|
 | None | None | Get all departments , return an array of object |
@@ -70,7 +70,7 @@ This repository is a demo for database subject , Chulalongkorn University
 ```
 
 ### POST /api/department
-> Add department to database  
+    Add department to database  
 | Body | Type | Value |
 |:---:|:---:|:---:|
 | name | string | Department name |
@@ -78,7 +78,7 @@ This repository is a demo for database subject , Chulalongkorn University
 | manager | number | staff_id of the manager |
 
 ### GET /api/patient
-> Get patient from database with / without condition  
+    Get patient from database with / without condition  
 | Query | Type |Output |
 |:---:|:---:|:---:|
 | None | None | Get all patients , return an array of object |
@@ -101,7 +101,7 @@ This repository is a demo for database subject , Chulalongkorn University
 
 ### POST /api/patient
 
-> Add a patient to the database   
+    Add a patient to the database   
 
 | Body | Type | Value |
 |:---:|:---:|:---:|
@@ -116,7 +116,7 @@ This repository is a demo for database subject , Chulalongkorn University
 | parent_phone | string | Patient's parent phone |
 
 ### GET /api/appoint
-> Get appointments from database  
+    Get appointments from database  
 | Query | Type |Output |
 |:---:|:---:|:---:|
 | None | None | Get all appointments , return an array of object |
