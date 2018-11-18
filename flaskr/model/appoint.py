@@ -39,13 +39,13 @@ def getAppoint(start=None , stop=None , patient_id=None , doctor_id=None):
             join Medical_staff on Appoint.Doctor_ID = Medical_staff.Staff_ID \
             join Patient on Appoint.Patient_ID = Patient.Patient_ID'
             condition = []
-            if patient_id != None:
+            if patient_id is not None:
                 condition.append(f' Appoint.Patient_ID={patient_id}')
-            if doctor_id != None:
+            if doctor_id is not None:
                 condition.append(f' Appoint.Doctor_ID={doctor_id}')
-            if start != None:
+            if start is not None:
                 condition.append(f' Appoint.Appointment_date >= "{start}"')
-            if stop != None:
+            if stop is not None:
                 condition.append(f' Appoint.Appointment_date <= "{stop}"')
             if len(condition) > 0:
                 query += ' WHERE ' + ' AND '.join(condition)

@@ -51,7 +51,7 @@ def getPatient(patient_id=None):
     try:
         with mysql.cursor() as cursor:
             query = 'select * from Patient'
-            if patient_id != None:
+            if patient_id is not None:
                 query += f' where Patient_ID = {patient_id}'
                 cursor.execute(query)
                 result = cursor.fetchone()

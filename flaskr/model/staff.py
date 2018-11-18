@@ -9,9 +9,9 @@ def getMedicalStaff(staff_id=None , medical_type=None):
         with mysql.cursor() as cursor:
             query = "SELECT * FROM Medical_staff"
             condition = []
-            if medical_type != None:
+            if medical_type is not None:
                 condition.append(f'Medical_type = "{medical_type}"')
-            if staff_id != None:
+            if staff_id is not None:
                 condition.append(f'Staff_ID = {staff_id}')
             if len(condition) > 0:
                 query += ' WHERE ' + ' AND '.join(condition)
@@ -43,21 +43,21 @@ def edit(
         with mysql.cursor() as cursor:
             temp = 'UPDATE Medical_staff SET '
             query = temp
-            if sex != None:
+            if sex is not None:
                 query += f'Sex = "{sex}" , '
-            if salary != None:
+            if salary is not None:
                 query += f'Salary = {salary} , '
-            if mobile_tel != None:
+            if mobile_tel is not None:
                 query += f'Mobile_tel = "{mobile_tel}" , '
-            if home_tel != None:
+            if home_tel is not None:
                 query += f'Home_tel = "{home_tel}" , '
-            if firstname != None:
+            if firstname is not None:
                 query += f'First_name = "{firstname}" , '
-            if lastname != None:
+            if lastname is not None:
                 query += f'Last_name = "{lastname}" , '
-            if address != None:
+            if address is not None:
                 query += f'Address = "{address}" , '
-            if email != None:
+            if email is not None:
                 query += f'Email = "{email}" , '
             if query == temp:
                 raise ValueError('Args are invalid!')
