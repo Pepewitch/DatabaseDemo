@@ -1,37 +1,50 @@
 from flask import Blueprint, request, jsonify
 from model import staff, department, patient, appoint
 from dateutil import parser
+from werkzeug.exceptions import HTTPException, NotFound
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
-@api.route('/medical_staff' , methods=('GET' , 'PATCH' , 'DELETE'))
+@api.route('/medical_staff' , methods=('GET',))
 def medical_staff_route():
-    if request.method == 'GET':
-        medical_type = request.args.get('type')
-        staff_id = request.args.get('id')
-        return jsonify(staff.getMedicalStaff(medical_type=medical_type , staff_id=staff_id))
-    elif request.method == 'PATCH':
-        staff_id = request.args.get('id')
-        sex = request.args.get('sex')
-        salary = request.args.get('salary')
-        mobile_tel = request.args.get('mobile_tel')
-        home_tel = request.args.get('home_tel')
-        email = request.args.get('email')
-        address = request.args.get('address')
-        staff.edit(
-            staff_id=staff_id , 
-            sex=sex , 
-            salary=salary , 
-            mobile_tel=mobile_tel , 
-            home_tel=home_tel , 
-            email=email , 
-            address=address
-        )
-        return jsonify({'message': f'UPDATE Staff_ID = {id}'})
-    elif request.method == 'DELETE':
-        staff.delete(request.args.get('id'))
-        return jsonify({'message': f'DELETE Staff_ID = {id}'})
+    try:
+        params = {
+            'medical_type' : request.args.get('type'),
+            'staff_id' : request.args.get('id')
+        }
+        return jsonify(staff.getMedicalStaff(**params))
+    except Exception:
+        return '' , 500
 
+@api.route('/medical_staff/<staff_id>' , methods=('GET' , 'PATCH' , 'DELETE'))
+def medical_staff_id_route(staff_id):
+    if request.method == 'GET':
+        try:
+            params = {
+            'medical_type' : request.args.get('type'),
+            'staff_id' : staff_id
+            }
+            return jsonify(staff.getMedicalStaff(**params))
+        except Exception:
+            return '' , 500
+    elif request.method == 'PATCH':
+        try:
+            params = { 'staff_id' : staff_id }
+            keys = ['sex' , 'salary' , 'mobile_tel' , 'home_tel' , 'email' , 'address']
+            for key in keys:
+                if key in request.form:
+                    params[key] = request.form[key]
+            staff.edit(**params)
+            return '' , 200
+        except Exception:
+            return '' , 500
+    elif request.method == 'DELETE':
+        try:
+            staff.delete(staff_id)
+            return '' , 200
+        except Exception:
+            return '' , 500
+        
 # TODO: Add route for add medical_staff with type doctor / pharmacist / nurse , also add in Doctor table 
 
 @api.route('/department', methods=('GET', 'POST', 'PATCH', 'DELETE'))
@@ -40,20 +53,14 @@ def department_route():
         return jsonify(department.getDepartment())
     elif request.method == 'POST':
         try:
-            if 'name' in request.form:
-                if 'manager' in request.form:
-                    department.insertDepartment(
-                        name=request.form['name'],
-                        location=request.form['location'], 
-                        manager=int(request.form['manager'])
-                    )
-                else:
-                    department.insertDepartment(
-                        name=request.form['name'],
-                        location=request.form['location'], 
-                    )
-        except Exception as e:
-            print('Exception' , e)
+            params = {
+                'name' : request.form['name'],
+                'manager' : request.form['manager'],
+                'location' : request.form['location'],
+            }
+            department.insertDepartment(**params)
+        except HTTPException as e:
+            return jsonify({'message' : 'Arguments are invalid'}) , 400
         return jsonify(request.form)
     elif request.method == 'PATCH':
         # TODO: edit department
@@ -66,17 +73,20 @@ def patient_route():
         patient_id = request.args.get('id')
         return jsonify(patient.getPatient(patient_id=patient_id))
     elif request.method == 'POST':
-        patient.insertPatient(
-            firstname=request.form['firstname'] , 
-            lastname=request.form['lastname'] ,
-            sex=request.form['sex'] ,
-            birthdate=parser.parse(request.form['birthdate']).strftime('%Y-%m-%d') ,
-            address=request.form['address'],
-            phone=request.form['phone'],
-            parent_firstname=request.form['parent_firstname'],
-            parent_lastname=request.form['parent_lastname'],
-            parent_phone=request.form['parent_phone']
-        )
+        try:
+            params = {}
+            params['firstname']=request.form['firstname']
+            params['lastname']=request.form['lastname']
+            params['sex']=request.form['sex']
+            params['birthdate']=parser.parse(request.form['birthdate']).strftime('%Y-%m-%d')
+            params['address']=request.form['address']
+            params['phone']=request.form['phone']
+            params['parent_firstname']=request.form['parent_firstname']
+            params['parent_lastname']=request.form['parent_lastname']
+            params['parent_phone']=request.form['parent_phone']
+            patient.insertPatient(**params)
+        except HTTPException as e:
+            return jsonify({'message' : 'Arguments are invalid'}) , 400
         return jsonify(request.form)
 
 @api.route('/appoint', methods=('GET', 'POST'))
