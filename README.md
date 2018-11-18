@@ -14,11 +14,11 @@ This repository is a demo for database subject , Chulalongkorn University
 ## API
 ### GET /api/medical_staff
 #### Get medical staff from database with / without condition
-| Query | Output |
-|:---:|:---:|
-| None | Get all staffs , return an array of object |
-| id | Get a staff which match `id` , return a single object |
-| type | Get staffs which medical_type match `type` , return an array of object |
+| Query | Type | Output |
+|:---:|:---:|:---:|
+| None | None |Get all staffs , return an array of object |
+| id | number |Get a staff which match `id` , return a single object |
+| type | string |Get staffs which medical_type match `type` , return an array of object |
 #### Object description
 ```
 {
@@ -35,12 +35,27 @@ This repository is a demo for database subject , Chulalongkorn University
     "Staff_ID": number
 }
 ```
+### GET /api/medical_staff/<staff_id>
+#### Get a medical staff that match staff_id
+
+### PATCH /api/medical_staff/<staff_id>
+#### Edit a medical staff that match staff_id
+| Body | Type | Value |
+|:---:|:---:|:---:|
+| sex | string | Staff sex |
+| salary | number | Staff salary |
+| mobile_tel | string | Staff mobile_tel |
+| home_tel | string | Staff home_tel |
+| address | string | Staff address |
+
+### DELETE /api/medical_staff/<staff_id>
+#### DELETE a medical staff that match staff_id
 
 ### GET /api/department
 #### Get department from database
-| Query | Output |
-|:---:|:---:|
-| None | Get all departments , return an array of object |
+| Query | Type |Output |
+|:---:|:---:|:---:|
+| None | None | Get all departments , return an array of object |
 #### Object description
 ```
 {
@@ -56,18 +71,18 @@ This repository is a demo for database subject , Chulalongkorn University
 
 ### POST /api/department
 #### Add department to database
-| Form | Value |
-|:---:|:---:|
-| name | Department name |
-| location | Department location |
-| manager | staff_id of the manager |
+| Body | Type | Value |
+|:---:|:---:|:---:|
+| name | string | Department name |
+| location | string | Department location |
+| manager | number | staff_id of the manager |
 
 ### GET /api/patient
 #### Get patient from database with / without condition
-| Query | Output |
-|:---:|:---:|
-| None | Get all patients , return an array of object |
-| id | Get a patient which match `id` , return a single object |
+| Query | Type |Output |
+|:---:|:---:|:---:|
+| None | None | Get all patients , return an array of object |
+| id | number | Get a patient which match `id` , return a single object |
 #### Object description
 ```
 {
@@ -84,6 +99,40 @@ This repository is a demo for database subject , Chulalongkorn University
 }
 ```
 
+### POST /api/patient
+#### Add a patient to the database
+| Body | Type | Value |
+|:---:|:---:|:---:|
+| firstname | string | Patient firstname |
+| lastname | string | Patient lastname |
+| sex | string | 'Male' or 'Female' |
+| birthdate | string | datestring in ISOString format, return value from method Date.toISOString() |
+| address | string | Patient address |
+| phone | string | Patient phone number |
+| parent_firstname | string | Patient's parent firstname |
+| parent_lastname | string | Patient's parent lastname |
+| parent_phone | string | Patient's parent phone |
+
+### GET /api/appoint
+#### Get appointments from database
+| Query | Type |Output |
+|:---:|:---:|:---:|
+| None | None | Get all appointments , return an array of object |
+#### Object description
+```
+{
+    "Appointment_date": datetime string eg. "Mon, 23 Jul 2018 13:00:00 GMT",
+    "Doctor_ID": number,
+    "Doctor_email": string,
+    "Doctor_first_name": string,
+    "Doctor_last_name": string,
+    "Doctor_sex": 'Male' | 'Female',
+    "Patient_ID": number,
+    "Patient_first_name": string,
+    "Patient_last_name": string,
+    "Patient_sex": 'Male' | 'Female'
+}
+```
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
