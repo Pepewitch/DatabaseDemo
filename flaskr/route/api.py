@@ -92,11 +92,22 @@ def patient_route():
 @api.route('/appoint', methods=('GET', 'POST'))
 def appoint_route():
     if request.method == 'GET':
-        return jsonify(appoint.getAppoint())
+        try:
+            return jsonify(appoint.getAppoint())
+        except Exception:
+            return '' , 500
+        
     elif request.method == 'POST':
-        appoint.insertAppoint(
-            doctor_id=request.form['doctor_id'] , 
-            patient_id=request.form['patient_id'] , 
-            appoint_date=request.form['appoint_date']
-        )
-        return jsonify(request.form)
+        try:
+            params = {
+                doctor_id:request.form['doctor_id'] , 
+                patient_id:request.form['patient_id'] , 
+                appoint_date:parser.parse(request.form['appoint_date']).strftime('%Y-%m-%d %H:%M:%S')
+            }
+            appoint.insertAppoint(**params)
+            return jsonify(request.form)
+        except HTTPException:
+            return jsonify({'message' : 'Arguments are invalid'}) , 400
+        except Exception:
+            return '' , 500
+        
