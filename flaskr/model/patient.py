@@ -3,6 +3,8 @@ from . import getConnection
 from functools import reduce
 
 def reduceAllergy(prev , curr):
+    if 'Allergy.Patient_ID' in prev:
+        del prev['Allergy.Patient_ID']
     if isinstance(prev['Allergy_name'],str):
         prev['Allergy_name'] = [prev['Allergy_name']]
     prev['Allergy_name'].append(curr['Allergy_name'])
@@ -67,13 +69,20 @@ def getPatient(patient_id=None):
             with mysql.cursor() as cursor:
                 query = f'select * from Patient left join Allergy \
                 on Patient.Patient_ID = Allergy.Patient_ID \
-                where Patient_ID = {patient_id}'
+                where Patient.Patient_ID = {patient_id}'
                 cursor.execute(query)
                 res = cursor.fetchall()
-                if len(res) > 0:
+                if len(res) > 1:
                     result = reduce(reduceAllergy , res)
+                elif len(res) == 1:
+                    if res[0]['Allergy_name'] is not None:
+                        res[0]['Allergy_name'] = [res[0]['Allergy_name']]
+                    else:
+                        res[0]['Allergy_name'] = []
+                    del res[0]['Allergy.Patient_ID']
+                    result = res[0]
         except Exception as e:
-            print (e)
+            print ('err' , e)
         finally:
             mysql.close()
     else:

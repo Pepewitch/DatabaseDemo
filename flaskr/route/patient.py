@@ -30,3 +30,8 @@ def patient_route():
             return jsonify({'message' : 'Arguments are invalid'}) , 400
         except Exception:
             return '' , 500
+
+@patient_api.route('/patient/<patient_id>', methods=('GET',))
+def patient_id_route(patient_id):
+    if request.method == 'GET':
+        return jsonify(patient.getPatient(patient_id=patient_id))

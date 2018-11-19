@@ -152,6 +152,7 @@ This repository is a demo for database subject , Chulalongkorn University
     "Patient_last_name": string,
     "Phone_number": string,
     "Sex": 'Male' | 'Female'
+    "Allergy_name": Array<string> of allergy
 }
 ```
 
@@ -170,6 +171,10 @@ This repository is a demo for database subject , Chulalongkorn University
 | parent_firstname | string | Patient's parent firstname |
 | parent_lastname | string | Patient's parent lastname |
 | parent_phone | string | Patient's parent phone |
+| allergy | string (Optional) | Patient's allergy in comma seperate format eg. 'Peanut allergy,Shrimp' |
+
+### GET /api/patient/<patient_id>
+    Get a patient from database which match the patient_id
 
 ### GET /api/appoint
     Get appointments from database, many optional queries can be used together.
