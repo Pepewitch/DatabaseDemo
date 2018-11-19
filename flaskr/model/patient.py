@@ -10,7 +10,8 @@ def insertPatient(
     phone , 
     parent_phone , 
     parent_firstname , 
-    parent_lastname
+    parent_lastname ,
+    allergy = None
 ):
     mysql = getConnection()
     result = None
@@ -38,6 +39,12 @@ def insertPatient(
             "{parent_lastname}"\
             )'
             cursor.execute(query)
+            if allergy is not None:
+                query = 'insert into Allergy (Allergy_name , Patient_ID) values '
+                query += ' , '.join(
+                    map(lambda x: f'("{x}",last_insert_id())' , allergy)
+                )
+                cursor.execute(query)
             mysql.commit()
     except Exception as e:
         print (e)

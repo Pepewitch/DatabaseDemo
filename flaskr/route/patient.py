@@ -5,7 +5,7 @@ from werkzeug.exceptions import HTTPException
 
 patient_api = Blueprint('patient_api', __name__, url_prefix='/api/patient')
 
-@patient_api.route('/', methods=('GET', 'POST'))
+@patient_api.route('', methods=('GET', 'POST'))
 def patient_route():
     if request.method == 'GET':
         patient_id = request.args.get('id')
@@ -22,6 +22,8 @@ def patient_route():
             params['parent_firstname']=request.form['parent_firstname']
             params['parent_lastname']=request.form['parent_lastname']
             params['parent_phone']=request.form['parent_phone']
+            if 'allergy' in request.form:
+                params['allergy']=request.form['allergy'].split(',')
             patient.insertPatient(**params)
             return '' , 200
         except HTTPException:

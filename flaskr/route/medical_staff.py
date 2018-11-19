@@ -5,7 +5,7 @@ from dateutil import parser
 
 medical_staff_api = Blueprint('medical_staff_api', __name__ , url_prefix='/api/medical_staff')
 
-@medical_staff_api.route('/' , methods=('GET',))
+@medical_staff_api.route('' , methods=('GET',))
 def medical_staff_route():
     try:
         params = {

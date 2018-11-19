@@ -30,4 +30,3 @@ def appoint_route():
             return jsonify({'message' : 'Arguments are invalid'}) , 400
         except Exception as e:
             return '' , 500
-        
