@@ -1,9 +1,9 @@
 from flask import Blueprint, request, jsonify
 from model import department
 
-department_api = Blueprint('department_api', __name__ , url_prefix='/api/department')
+department_api = Blueprint('department_api', __name__ , url_prefix='/api')
 
-@department_api.route('/', methods=('GET', 'POST', 'PATCH', 'DELETE'))
+@department_api.route('/department', methods=('GET', 'POST', 'PATCH', 'DELETE'))
 def department_route():
     if request.method == 'GET':
         return jsonify(department.getDepartment())

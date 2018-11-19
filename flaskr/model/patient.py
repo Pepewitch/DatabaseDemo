@@ -1,5 +1,12 @@
 import pymysql
 from . import getConnection
+from functools import reduce
+
+def reduceAllergy(prev , curr):
+    if isinstance(prev['Allergy_name'],str):
+        prev['Allergy_name'] = [prev['Allergy_name']]
+    prev['Allergy_name'].append(curr['Allergy_name'])
+    return prev
 
 def insertPatient(
     firstname ,
@@ -53,20 +60,43 @@ def insertPatient(
     return result
 
 def getPatient(patient_id=None):
-    mysql = getConnection()
     result = None
-    try:
-        with mysql.cursor() as cursor:
-            query = 'select * from Patient'
-            if patient_id is not None:
-                query += f' where Patient_ID = {patient_id}'
+    if patient_id is not None:
+        mysql = getConnection()
+        try:
+            with mysql.cursor() as cursor:
+                query = f'select * from Patient left join Allergy \
+                on Patient.Patient_ID = Allergy.Patient_ID \
+                where Patient_ID = {patient_id}'
                 cursor.execute(query)
-                result = cursor.fetchone()
-            else:
+                res = cursor.fetchall()
+                if len(res) > 0:
+                    result = reduce(reduceAllergy , res)
+        except Exception as e:
+            print (e)
+        finally:
+            mysql.close()
+    else:
+        mysql = getConnection()
+        patients = None
+        allergies = None
+        try:
+            with mysql.cursor() as cursor:
+                query = f'select * from Patient'
                 cursor.execute(query)
-                result = cursor.fetchall()
-    except Exception as e:
-        print (e)
-    finally:
-        mysql.close()
+                patients = cursor.fetchall()
+                for i in patients:
+                    i['Allergy_name'] = []
+                query = f'select * from Allergy'
+                cursor.execute(query)
+                allergies = cursor.fetchall()
+                for i in allergies:
+                    for j in patients:
+                        if j['Patient_ID'] == i['Patient_ID']:
+                            j['Allergy_name'].append(i['Allergy_name'])
+                result = patients
+        except Exception as e:
+            print (e)
+        finally:
+            mysql.close()
     return result

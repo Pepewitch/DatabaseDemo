@@ -3,9 +3,9 @@ from model import staff
 from werkzeug.exceptions import HTTPException
 from dateutil import parser
 
-medical_staff_api = Blueprint('medical_staff_api', __name__ , url_prefix='/api/medical_staff')
+medical_staff_api = Blueprint('medical_staff_api', __name__ , url_prefix='/api')
 
-@medical_staff_api.route('' , methods=('GET',))
+@medical_staff_api.route('/medical_staff' , methods=('GET',))
 def medical_staff_route():
     try:
         params = {
@@ -16,7 +16,7 @@ def medical_staff_route():
     except Exception:
         return '' , 500
 
-@medical_staff_api.route('/<staff_id>' , methods=('GET' , 'PATCH' , 'DELETE'))
+@medical_staff_api.route('/medical_staff/<staff_id>' , methods=('GET' , 'PATCH' , 'DELETE'))
 def medical_staff_id_route(staff_id):
     if request.method == 'GET':
         try:
@@ -45,7 +45,7 @@ def medical_staff_id_route(staff_id):
         except Exception:
             return '' , 500
         
-@medical_staff_api.route('/doctor' , methods=('GET' , 'POST'))
+@medical_staff_api.route('/medical_staff/doctor' , methods=('GET' , 'POST'))
 def medical_staff_doctor_route():
     if request.method == 'GET':
         try:
@@ -78,7 +78,7 @@ def medical_staff_doctor_route():
             print(e)
             return '' , 500
 
-@medical_staff_api.route('/nurse' , methods=('GET' , 'POST'))
+@medical_staff_api.route('/medical_staff/nurse' , methods=('GET' , 'POST'))
 def medical_staff_nurse_route():
     if request.method == 'GET':
         try:
@@ -112,7 +112,7 @@ def medical_staff_nurse_route():
             print(e)
             return '' , 500
 
-@medical_staff_api.route('/pharmacist' , methods=('GET' , 'POST'))
+@medical_staff_api.route('/medical_staff/pharmacist' , methods=('GET' , 'POST'))
 def medical_staff_pharmacist_route():
     if request.method == 'GET':
         try:

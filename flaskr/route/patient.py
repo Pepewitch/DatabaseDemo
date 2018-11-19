@@ -3,9 +3,9 @@ from model import patient
 from dateutil import parser
 from werkzeug.exceptions import HTTPException
 
-patient_api = Blueprint('patient_api', __name__, url_prefix='/api/patient')
+patient_api = Blueprint('patient_api', __name__, url_prefix='/api')
 
-@patient_api.route('', methods=('GET', 'POST'))
+@patient_api.route('/patient', methods=('GET', 'POST'))
 def patient_route():
     if request.method == 'GET':
         patient_id = request.args.get('id')

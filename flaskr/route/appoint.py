@@ -3,9 +3,9 @@ from model import staff, department, patient, appoint
 from dateutil import parser
 from werkzeug.exceptions import HTTPException
 
-appoint_api = Blueprint('appoint_api', __name__, url_prefix='/api/appoint')
+appoint_api = Blueprint('appoint_api', __name__, url_prefix='/api')
 
-@appoint_api.route('/', methods=('GET', 'POST'))
+@appoint_api.route('/appoint', methods=('GET', 'POST'))
 def appoint_route():
     if request.method == 'GET':
         try:
