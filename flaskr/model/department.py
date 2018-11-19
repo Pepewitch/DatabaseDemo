@@ -50,7 +50,6 @@ def getDepartment():
             on Department.Manager = Medical_staff.Staff_ID'
             cursor.execute(query)
             result = cursor.fetchall()
-            print(result)
     except Exception as e:
         print (e)
     finally:

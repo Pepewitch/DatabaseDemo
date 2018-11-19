@@ -51,7 +51,6 @@ def getAppoint(start=None , stop=None , patient_id=None , doctor_id=None):
                 query += ' WHERE ' + ' AND '.join(condition)
             cursor.execute(query)
             result = cursor.fetchall()
-            print(result)
     except Exception as e:
         print (e)
     finally:
