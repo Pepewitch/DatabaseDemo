@@ -30,7 +30,7 @@ def medical_staff_id_route(staff_id):
     elif request.method == 'PATCH':
         try:
             params = { 'staff_id' : staff_id }
-            keys = ['sex' , 'salary' , 'mobile_tel' , 'home_tel' , 'email' , 'address']
+            keys = ['sex' , 'salary' , 'mobile_tel' , 'home_tel' , 'email' , 'address' , 'firstname' , 'lastname']
             for key in keys:
                 if key in request.form:
                     params[key] = request.form[key]
@@ -47,6 +47,7 @@ def medical_staff_id_route(staff_id):
         
 @medical_staff_api.route('/medical_staff/doctor' , methods=('GET' , 'POST'))
 def medical_staff_doctor_route():
+    print(request.form)
     if request.method == 'GET':
         try:
             params = {
