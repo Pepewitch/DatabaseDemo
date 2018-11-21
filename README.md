@@ -96,6 +96,8 @@ This repository is a demo for database subject , Chulalongkorn University
     Edit a medical staff that match staff_id, optional key can be used together.
 | Body | Type | Value |
 |:---:|:---:|:---:|
+| firstname | string (Optional) | Staff firstname |
+| lastname | string (Optional) | Staff lastname |
 | sex | string (Optional) | Staff sex |
 | salary | number (Optional) | Staff salary |
 | mobile_tel | string (Optional) | Staff mobile_tel |
@@ -105,7 +107,6 @@ This repository is a demo for database subject , Chulalongkorn University
 
 ### DELETE /api/medical_staff/<staff_id>
     Delete a medical staff that match staff_id
-    **** Cannot delete because of reference from Doctor , Nurse and Pharmacist table , wait for fix **** 
 
 ### GET /api/department
     Get department from database  
