@@ -38,7 +38,7 @@ def edit(
             query = temp
     
             if firstname is not None:
-                query += f'Name = "{name}" , '
+                query += f'Medicine_Name = "{name}" , '
 
             if quantity is not None:
                 query += f'Quantity = "{quantity}" , '
@@ -73,14 +73,15 @@ def delete(medicine_id):
         mysql.close()
     return result
 
-def insertMedicine(name,quantity,exp_date):
+def insertMedicine(id,name,quantity,exp_date):
     mysql = getConnection()
     result = None
     try:
         with mysql.cursor() as cursor:
             query1 = f"INSERT INTO Medicine (\
-	        Name,Quantity,Exp_date\
+	        Medicine_ID, Medicine_Name,Quantity,Exp_date\
             ) VALUES (\
+            '{id}', \
 	        '{name}',\
             '{quantity}' , \
             '{exp_date}' , \
@@ -93,7 +94,7 @@ def insertMedicine(name,quantity,exp_date):
         mysql.close()
     return result
 
-def refillMedicine(medicine_id, pharmacist_id,quantity,date):
+def refillMedicine(medicine_id, pharmacist_id,quantity):
     mysql = getConnection()
     result = None
     try:
@@ -104,12 +105,15 @@ def refillMedicine(medicine_id, pharmacist_id,quantity,date):
 	        '{medicine_id}',\
             '{pharmacist_id}' , \
             '{quantity}' , \
-            '{date}', \
+            '{CURDATE()}', \
             );"
             cursor.execute(query1)
-            #Todo : update in medecine table
-            # Date my get from system date time
             mysql.commit()
+            
+            #Todo : update in medecine table
+            # medicine = getMedicine(medicine_id)
+            # edit(medicine_id, quantity=medicine[Quantity]+quantity); 
+
     except Exception as e:
         print (e)
     finally:
@@ -117,7 +121,7 @@ def refillMedicine(medicine_id, pharmacist_id,quantity,date):
     return result
 
 
-def perscribeMedicine(doctor_id, patient_id,medicine_id, quantity ,date):
+def perscribeMedicine(medicine_id, patient_id,docter_id, quantity):
     mysql = getConnection()
     result = None
     try:
@@ -128,11 +132,11 @@ def perscribeMedicine(doctor_id, patient_id,medicine_id, quantity ,date):
 	        '{doctor_id}',\
             '{patient_id}' , \
             '{medicine_id}' , \
-            '{date}', \
+            '{CURDATE()}', \
             '{quantity}', \
             );"
             cursor.execute(query1)
-            #Todo : update in medecine table ???
+            #Todo : decrease quantity in medicine table
 
             mysql.commit()
     except Exception as e:
