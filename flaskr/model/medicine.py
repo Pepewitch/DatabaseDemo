@@ -37,9 +37,8 @@ def edit(
             temp = 'UPDATE Medecine SET '
             query = temp
     
-            if firstname is not None:
+            if name is not None:
                 query += f'Medicine_Name = "{name}" , '
-
             if quantity is not None:
                 query += f'Quantity = "{quantity}" , '
             if exp_date is not None:
@@ -73,19 +72,20 @@ def delete(medicine_id):
         mysql.close()
     return result
 
-def insertMedicine(id,name,quantity,exp_date):
+def insertMedicine(name,quantity,exp_date):
     mysql = getConnection()
     result = None
+    
     try:
         with mysql.cursor() as cursor:
             query1 = f"INSERT INTO Medicine (\
-	        Medicine_ID, Medicine_Name,Quantity,Exp_date\
+	        Medicine_name,Quantity,Exp_date\
             ) VALUES (\
-            '{id}', \
 	        '{name}',\
-            '{quantity}' , \
-            '{exp_date}' , \
+            '{quantity}', \
+            '{exp_date}'\
             );"
+            print(query1)
             cursor.execute(query1)
             mysql.commit()
     except Exception as e:
@@ -94,7 +94,7 @@ def insertMedicine(id,name,quantity,exp_date):
         mysql.close()
     return result
 
-def refillMedicine(medicine_id, pharmacist_id,quantity):
+def refillMedicine(medicine_id, pharmacist_id,quantity): #done
     mysql = getConnection()
     result = None
     try:
@@ -105,15 +105,14 @@ def refillMedicine(medicine_id, pharmacist_id,quantity):
 	        '{medicine_id}',\
             '{pharmacist_id}' , \
             '{quantity}' , \
-            '{CURDATE()}', \
+            NOW() \
             );"
+            query2 = f"UPDATE Medicine SET Quantity = Quantity + {quantity}\
+            WHERE Medicine_ID = {medicine_id};"
             cursor.execute(query1)
+            cursor.execute(query2)
             mysql.commit()
             
-            #Todo : update in medecine table
-            # medicine = getMedicine(medicine_id)
-            # edit(medicine_id, quantity=medicine[Quantity]+quantity); 
-
     except Exception as e:
         print (e)
     finally:
@@ -121,7 +120,7 @@ def refillMedicine(medicine_id, pharmacist_id,quantity):
     return result
 
 
-def perscribeMedicine(medicine_id, patient_id,docter_id, quantity):
+def perscribeMedicine(medicine_id, patient_id,doctor_id, quantity):
     mysql = getConnection()
     result = None
     try:
@@ -132,13 +131,43 @@ def perscribeMedicine(medicine_id, patient_id,docter_id, quantity):
 	        '{doctor_id}',\
             '{patient_id}' , \
             '{medicine_id}' , \
-            '{CURDATE()}', \
-            '{quantity}', \
+            NOW(), \
+            '{quantity}' \
             );"
+            query2 = f"UPDATE Medicine SET Quantity = Quantity - {quantity}\
+            WHERE Medicine_ID = {medicine_id};"
+            print(query2)
             cursor.execute(query1)
-            #Todo : decrease quantity in medicine table
-
+            cursor.execute(query2)
             mysql.commit()
+            
+
+    except Exception as e:
+        print (e)
+    finally:
+        mysql.close()
+    return result
+
+
+def getPerscribe(medicine_id=None, patient_id=None,doctor_id=None):
+    mysql = getConnection()
+    result = None
+    try:
+        with mysql.cursor() as cursor:
+            query = "SELECT * FROM Perscribe"
+            condition = []
+            if medicine_id is not None:
+                condition.append(f'Medicine_id = "{medicine_id}"')
+            if doctor_id is not None:
+                condition.append(f'Doctor_ID = {doctor_id}')
+            if patient_id is not None:
+                condition.append(f'Patient_ID = {patient_id}')
+            if len(condition) > 0:
+                query += ' WHERE ' + ' AND '.join(condition)
+            print(query)
+            cursor.execute(query)
+            # print(query)
+            result = cursor.fetchall()
     except Exception as e:
         print (e)
     finally:
