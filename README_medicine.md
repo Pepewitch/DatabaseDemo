@@ -1,4 +1,4 @@
-### API for medicine
+# API for medicine
 
 ### GET /api/medicine
     Get medicine from database with / without condition  
@@ -11,14 +11,11 @@
 ```
 {
     "Medicine_ID" : number, 
-    "Name": string,
+    "Medicnie_name": string,
     "Quantity": number,
     "Exp_date":  datetime string eg. "Fri, 26 Apr 1991 00:00:00 GMT"
 }
 ```
-### GET /api/medicine/<medicine_id>
-    Get a medicine that match medicine_id  
-
 
 ### POST /api/medicine/
     Add a new medicine
@@ -28,32 +25,44 @@
 | quantity | number | quantity of medicines |
 | exp_date | datetime string | expiration date of medicine |
 
-
-### PATCH /api/medicine/<medicine_id> # note : Shall we allow to edit medicine??
-    Edit a medicine that match medicine_id, optional key can be used together.
-| Body | Type | Value |
-|:---:|:---:|:---:|
-| name | string (Optional) | Medicine name |
-| quantity | number(Optional) | Medicine quantity |
-| exp_date | string (Optional) | Staff sex | yangmaised!!
-
+### GET /api/medicine/<medicine_id>
+    Get a medicine that match medicine_id  
 
 ### DELETE /api/medicine/<medicine_id>
     Delete a medicine that match medicine_id
 
-### Refill Medicine  /api/medicine/refill/
+### Refill Medicine  /api/medicine/refill
     Refill a medicine
 | Body | Type | Value |
 |:---:|:---:|:---:|
-| medicine_name | string | Medicine name |
+| medicine_id | number | id of medicine |
+| pharmacist_id | number | is of pharmacist |
 | quantity | number | Quantity of medicine |
 
 
-### Perscibe Medicine /api/medicine/perscribe/
+### POST /api/medicine/perscribe
     Perscribe a medicine to patient
 | Body | Type | Value |
 |:---:|:---:|:---:|
-| medicine_name | string | Medicine name |
-| quantity | number | Medicine quantity |
-| doctor_name | string | Doctor name | 
-| patient_name | string | Patient name | 
+| medicine_id | number | Medicine ID |
+| quantity | number | Medicine's quantity |
+| doctor_id | number | Doctor ID | 
+| patient_id | number | Patient ID | 
+### GET /api/medicine/perscibe
+    Get a persription info. (query can combine together)
+| Query | Type | Output |
+|:---:|:---:|:---:|
+| medicine_id | number | Get all Perscription match to medicine_id, Return array of object |
+| doctor_id | number | Get all Perscription match to doctor_id, Return array of object | 
+| patient_id | number | Get all Perscription match to patient_id, Return array of object |
+
+### Object Description
+```
+{
+    'Medicine_ID': number ,
+    'Patient_ID': number, 
+    'Doctor_ID': number, 
+    'Quantity' : number, 
+    'Perscribe_date : datetime string eg. "Fri, 26 Apr 1991 00:00:00 GMT"'
+}
+```
