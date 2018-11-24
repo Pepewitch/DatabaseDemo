@@ -25,7 +25,7 @@ def getAppoint(start=None , stop=None , patient_id=None , doctor_id=None):
     try:
         with mysql.cursor() as cursor:
             query = 'select \
-            Appoint.Appoint_ID as Appoint_ID\
+            Appoint.Appoint_ID as Appoint_ID ,\
             Appoint.Doctor_ID as Doctor_ID ,\
             Appoint.Patient_ID as Patient_ID ,\
             Appoint.Appointment_date as Appointment_date ,\
