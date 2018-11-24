@@ -187,6 +187,7 @@ This repository is a demo for database subject , Chulalongkorn University
 #### Object description
 ```
 {
+    "Appoint_ID": number,
     "Appointment_date": datetime string eg. "Mon, 23 Jul 2018 13:00:00 GMT",
     "Doctor_ID": number,
     "Doctor_email": string,
@@ -207,6 +208,16 @@ This repository is a demo for database subject , Chulalongkorn University
 | patient_id | number | Patient_ID |
 | appoint_date | string | datetimestring in ISO format from Date.toISOString() |
 
+### PATCH /api/appoint/<appoint_id>
+    Edit an appointment which match appoint_id
+| Body | Type | Value |
+|:---:|:---:|:---:|
+| doctor_id | number | Staff_ID of the doctor |
+| patient_id | number | Patient_ID |
+| appoint_date | string | datetimestring in ISO format from Date.toISOString() |
+
+### DELETE /api/appoint/<appoint_id>
+    Delete an appointment
 
 # API for medicine
 
