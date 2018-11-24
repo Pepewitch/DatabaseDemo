@@ -25,6 +25,7 @@ def getAppoint(start=None , stop=None , patient_id=None , doctor_id=None):
     try:
         with mysql.cursor() as cursor:
             query = 'select \
+            Appoint.Appoint_ID as Appoint_ID\
             Appoint.Doctor_ID as Doctor_ID ,\
             Appoint.Patient_ID as Patient_ID ,\
             Appoint.Appointment_date as Appointment_date ,\
@@ -51,6 +52,42 @@ def getAppoint(start=None , stop=None , patient_id=None , doctor_id=None):
                 query += ' WHERE ' + ' AND '.join(condition)
             cursor.execute(query)
             result = cursor.fetchall()
+    except Exception as e:
+        print (e)
+    finally:
+        mysql.close()
+    return result
+
+def updateAppointment(appoint_id , patient_id=None , doctor_id=None , appoint_date=None):
+    mysql = getConnection()
+    result = None
+    try:
+        with mysql.cursor() as cursor:
+            condition = ''
+            if patient_id is not None:
+                condition += f'Patient_ID={patient_id} ,'
+            if doctor_id is not None:
+                condition += f'Doctor_ID={doctor_id} ,'
+            if appoint_date is not None:
+                condition += f'Appointment_date={appoint_date} ,'
+            if len(condition) > 0:
+                query = f'update Appoint set {condition[:-1]} where Appoint_ID ={appoint_id};'
+                cursor.execute(query)
+                mysql.commit()
+    except Exception as e:
+        print (e)
+    finally:
+        mysql.close()
+    return result
+
+def deleteAppoint(appoint_id):
+    mysql = getConnection()
+    result = None
+    try:
+        with mysql.cursor() as cursor:
+            query = f'delete from Appoint where Appoint_ID={appoint_id}'
+            cursor.execute(query)
+            mysql.commit()
     except Exception as e:
         print (e)
     finally:

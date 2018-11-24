@@ -30,3 +30,29 @@ def appoint_route():
             return jsonify({'message' : 'Arguments are invalid'}) , 400
         except Exception as e:
             return '' , 500
+
+@appoint_api.route('/appoint/<appoint_id>', methods=('PATCH','DELETE'))
+def appoint_id_route(appoint_id):
+    if request.method == 'PATCH':
+        try:
+            params = {
+                'appoint_id': appoint_id
+            }
+            if 'doctor_id' in request.form:
+                params['doctor_id'] = request.form['doctor_id']
+            if 'patient_id' in request.form:
+                params['patient_id'] = request.form['patient_id']
+            if 'appoint_date' in request.form: 
+                param['appoint_date'] = parser.parse(request.form['appoint_date']).strftime('%Y-%m-%d %H:%M:%S')
+            appoint.updateAppointment(**params)
+            return '' , 200
+        except HTTPException:
+            return '' , 400
+        except Exception:
+            return '' , 500
+    if request.method == 'DELETE':
+        try:
+            appoint.deleteAppoint(appoint_id)
+            return '', 200
+        except Exception:
+           return '', 500 
