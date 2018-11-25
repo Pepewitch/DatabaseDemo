@@ -10,6 +10,7 @@ from route.appoint import appoint_api
 from route.patient import patient_api
 from route.department import department_api
 from route.medicine import medicine_api
+from route.treatment import treatment_api
 
 app = Flask(__name__)
 CORS(app)
@@ -18,6 +19,7 @@ app.register_blueprint(appoint_api)
 app.register_blueprint(patient_api)
 app.register_blueprint(department_api)
 app.register_blueprint(medicine_api)
+app.register_blueprint(treatment_api)
 
 @app.route("/")
 def index():
