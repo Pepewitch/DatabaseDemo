@@ -67,7 +67,7 @@ def updateTreatment(treatment_id, patient_id = None, doctor_id = None, cost = No
             condition += f'Doctor_ID={doctor_id} ,'
             if cost is not None:
                 condition += f'Treatment_cost={cost} ,'
-			if symptom is not None:
+            if symptom is not None:
                 condition += f'Symptom={symptom} ,'
             if len(condition) > 0:
                 query = f'update Treatment set {condition[:-1]} where Treatment_ID = {treatment_id};'
@@ -82,13 +82,13 @@ def updateTreatment(treatment_id, patient_id = None, doctor_id = None, cost = No
     return True
 
 def deleteTreatment(treatment_id):
-	mysql = getConnection()
-	try:
-		with mysql.cursor() as cursor:
-			query = f'delete from Treatment where Treatment_ID="{treatment_id}"'
+    mysql = getConnection()
+    try:
+        with mysql.cursor() as cursor:
+            query = f'delete from Treatment where Treatment_ID="{treatment_id}"'
             cursor.execute(query)
             mysql.commit()
-	except Exception as e:
+    except Exception as e:
         print (e)
         return False
     finally:

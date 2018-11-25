@@ -30,9 +30,9 @@ def test():
     return str(staff.test())
 
 if __name__ == '__main__':
-	d = PathInfoDispatcher({'/': app})
-	server = Server(('0.0.0.0', 8080), d)
-	try:
-		server.start()
-	except KeyboardInterrupt:
-		server.stop()
+    d = PathInfoDispatcher({'/': app})
+    server = Server(('0.0.0.0', 8080), d)
+    try:
+        server.start()
+    except KeyboardInterrupt:
+        server.stop()
