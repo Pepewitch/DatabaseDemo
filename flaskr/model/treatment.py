@@ -22,17 +22,17 @@ def insertTreatment(doctor_id , patient_id , cost, symptom):
     
     return True
 
-def getTreatment(patient_id, doctor_id = None):
+def getTreatment(patient_id = None, doctor_id = None):
     mysql = getConnection()
     result = None
     try:
         with mysql.cursor() as cursor:
             query = 'select \
-            Treatment.Treatment_ID\
-            Treatment.Doctor_ID \
-            Treatment.Patient_ID \
-            Treatment.Symptom \
-            Treatment.Treatment_cost \
+            Treatment.Treatment_ID,\
+            Treatment.Doctor_ID, \
+            Treatment.Patient_ID, \
+            Treatment.Symptom, \
+            Treatment.Treatment_cost, \
             Medical_staff.First_name as Doctor_first_name ,\
             Medical_staff.Last_name as Doctor_last_name ,\
             Medical_staff.Sex as Doctor_sex ,\
@@ -44,12 +44,14 @@ def getTreatment(patient_id, doctor_id = None):
             join Medical_staff on Treatment.Doctor_ID = Medical_staff.Staff_ID \
             join Patient on Treatment.Patient_ID = Patient.Patient_ID'
             condition = []
-            condition.append(f' Treatment.Patient_ID={patient_id}')
+            if patient_id is not None:
+                condition.append(f' Treatment.Patient_ID={patient_id}')
             if doctor_id is not None:
                 condition.append(f' Treatment.Doctor_ID={doctor_id}')
 
             if len(condition) > 0:
                 query += ' WHERE ' + ' AND '.join(condition)
+            # print (query)
             cursor.execute(query)
             result = cursor.fetchall()
     except Exception as e:
@@ -63,8 +65,10 @@ def updateTreatment(treatment_id, patient_id = None, doctor_id = None, cost = No
     try:
         with mysql.cursor() as cursor:
             condition = ''
-            condition += f'Patient_ID={patient_id} ,'
-            condition += f'Doctor_ID={doctor_id} ,'
+            if patient_id is not None:
+                condition += f'Patient_ID={patient_id} ,'
+            if doctor_id is not None:
+                condition += f'Doctor_ID={doctor_id} ,'
             if cost is not None:
                 condition += f'Treatment_cost={cost} ,'
             if symptom is not None:
