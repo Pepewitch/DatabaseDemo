@@ -269,6 +269,7 @@ This repository is a demo for database subject , Chulalongkorn University
 | quantity | number | Medicine's quantity |
 | doctor_id | number | Doctor ID | 
 | patient_id | number | Patient ID | 
+
 ### GET /api/medicine/perscibe
     Get a persription info. (query can combine together)
 | Query | Type | Output |
@@ -287,6 +288,37 @@ This repository is a demo for database subject , Chulalongkorn University
     'Perscribe_date : datetime string eg. "Fri, 26 Apr 1991 00:00:00 GMT"'
 }
 ```
+
+# API for Treatment
+
+### GET /api/treatment/
+    Get a persription info. (query can combine together)
+| Query | Type | Output |
+|:---:|:---:|:---:|
+| doctor_id | number | Get all Treatment match to doctor_id, Return array of object | 
+| patient_id | number | Get all Treatment match to patient_id, Return array of object |
+
+### POST /api/treatment
+    new treatment
+| Body | Type | Value |
+|:---:|:---:|:---:|
+| doctor_id | number | Doctor ID | 
+| patient_id | number | Patient ID | 
+| cost | number | Total cost |
+| symptom | string | Description |
+
+### PATCH /api/treatment/<treatment_id>
+    Edit a treatment which match treatment_id
+| Body | Type | Value |
+|:---:|:---:|:---:|
+| doctor_id | number | Staff_ID of the doctor |
+| patient_id | number | Patient_ID |
+| cost | number | Total cost |
+| symptom | string | Description |
+
+### DELETE /api/treatment/<treatment_id>
+    Delete a treatment that match treatment_id
+
 
 
 ## Contributing
