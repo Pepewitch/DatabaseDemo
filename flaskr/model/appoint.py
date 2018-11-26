@@ -69,7 +69,7 @@ def updateAppointment(appoint_id , patient_id=None , doctor_id=None , appoint_da
             if doctor_id is not None:
                 condition += f'Doctor_ID={doctor_id} ,'
             if appoint_date is not None:
-                condition += f'Appointment_date={appoint_date} ,'
+                condition += f'Appointment_date="{appoint_date}" ,'
             if len(condition) > 0:
                 query = f'update Appoint set {condition[:-1]} where Appoint_ID ={appoint_id};'
                 cursor.execute(query)

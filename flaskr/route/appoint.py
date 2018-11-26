@@ -43,7 +43,7 @@ def appoint_id_route(appoint_id):
             if 'patient_id' in request.form:
                 params['patient_id'] = request.form['patient_id']
             if 'appoint_date' in request.form: 
-                param['appoint_date'] = parser.parse(request.form['appoint_date']).strftime('%Y-%m-%d %H:%M:%S')
+                params['appoint_date'] = parser.parse(request.form['appoint_date']).strftime('%Y-%m-%d %H:%M:%S')
             appoint.updateAppointment(**params)
             return '' , 200
         except HTTPException:
