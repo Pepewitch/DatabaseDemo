@@ -9,4 +9,4 @@ setup(name='DatabaseDemo',
       author_email='',
       url='',
      install_requires=['Flask>=0.12','PyMySQL>=0.9.2', 'cheroot>=6.4.0'],
-     )asdasdsasd
+     )
