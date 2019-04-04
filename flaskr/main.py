@@ -20,7 +20,7 @@ app.register_blueprint(patient_api)
 app.register_blueprint(department_api)
 app.register_blueprint(medicine_api)
 app.register_blueprint(treatment_api)
-
+asdasdasdasa
 @app.route("/")
 def index():
     return send_file(join('..','view','index.html'))
